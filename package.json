@@ -11,7 +11,7 @@
         "reinstall:dev": "npx rimraf node_modules && npm i -g pnpm && pnpm i",
         "reinstall:ci": "npm i -g pnpm && pnpm install --frozen-lockfile",
         "esbuild": "npx rimraf ./build && npx esbuild src/index.ts --bundle --platform=node --target=node18.12.1 --outfile=build/index.js --format=cjs --loader:.node=file",
-        "post:build": "cp src/services/aiEngine/aiEngine.wsdl src/services/abrevioWebservice/abrevioWebservice.wsdl src/controllers/aiEngine/aiEngine.html src/controllers/abrevioWebservice/abrevioWebservice.html build",
+        "post:build": "cp src/services/aiEngine/aiEngine.wsdl src/services/abrevioWebservice/abrevioWebservice.wsdl src/controllers/aiEngine/aiEngine.html src/controllers/abrevioWebservice/abrevioWebservice.html src/abrevioWebservice/convertHL7V2TOV3/* build",
         "build": "pnpm run esbuild && pnpm run post:build",
         "build:tsc": "npx rimraf ./build && tsc",
         "start:dev": "NODE_ENV=dev npx nodemon",

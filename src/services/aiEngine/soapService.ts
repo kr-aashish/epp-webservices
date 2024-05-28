@@ -1,4 +1,4 @@
-import aiEngineVersion from "../../aiEngine/getAiEngineVersion";
+import aiEngineVersion from "../../aiEngine/aiEngineVersion/aiEngineVersion";
 
 const soapService = {
     MyService: {

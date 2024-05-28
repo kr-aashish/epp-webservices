@@ -1,4 +1,4 @@
-import logger from "../loggers/winstonLogger";
+import logger from "../../loggers/winstonLogger";
 
 const csvDeIdentifyProcessor = (args: any) => {
     const csv = args.CSV;
