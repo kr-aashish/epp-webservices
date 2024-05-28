@@ -1,0 +1,58 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://tempuri.org/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="MyService"
+             targetNamespace="http://tempuri.org/">
+    <types>
+        <xsd:schema targetNamespace="http://tempuri.org/">
+            <xsd:element name="CSVDeIdentifyProcessor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CSV" type="xsd:string"/>
+                        <xsd:element name="encryptkey" type="xsd:string"/>
+                        <xsd:element name="encryptkeysize" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CSVDeIdentifyProcessorResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CSVDeIdentifyProcessorResult" type="xsd:string"/>
+                        <xsd:element name="successful" type="xsd:boolean"/>
+                        <xsd:element name="errormessage" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+    <message name="CSVDeIdentifyProcessorRequest">
+        <part name="CSVDeIdentifyProcessor" element="tns:CSVDeIdentifyProcessor"/>
+    </message>
+    <message name="CSVDeIdentifyProcessorResponse">
+        <part name="CSVDeIdentifyProcessorResponse" element="tns:CSVDeIdentifyProcessorResponse"/>
+    </message>
+    <portType name="MyPortType">
+        <operation name="CSVDeIdentifyProcessor">
+            <input message="tns:CSVDeIdentifyProcessorRequest"/>
+            <output message="tns:CSVDeIdentifyProcessorResponse"/>
+        </operation>
+    </portType>
+    <binding name="MyBinding" type="tns:MyPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CSVDeIdentifyProcessor">
+            <soap:operation soapAction="http://tempuri.org/CSVDeIdentifyProcessor"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MyService">
+        <port name="MyPort" binding="tns:MyBinding">
+            <soap:address location="http://localhost:8080/YourService.asmx"/>
+        </port>
+    </service>
+</definitions>

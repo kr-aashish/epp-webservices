@@ -1,0 +1,7 @@
+/node_modules
+/build
+/logs
+/coverage
+/app
+/.vscode
+.env.*
