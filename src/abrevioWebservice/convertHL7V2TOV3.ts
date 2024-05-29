@@ -1,14 +1,15 @@
 import edge from 'edge-js';
-import logger from '../../loggers/winstonLogger';
-import { ConvertHL7V2TOV3Args, ConvertHL7V2TOV3Result } from '../../models/abrevioWebservice/convertHL7V2TOV3';
+import logger from '../loggers/winstonLogger';
+import { ConvertHL7V2TOV3Args, ConvertHL7V2TOV3Result } from '../models/abrevioWebservice/convertHL7V2TOV3';
+import path from 'path';
 
 const convertHL7V2TOV3 = async (args: ConvertHL7V2TOV3Args): Promise<ConvertHL7V2TOV3Result> => {
     const { hl7v2 } = args;
     logger.info('convertHL7V2TOV3');
-    logger.info(hl7v2);
 
+    const dllPath = path.dirname(path.resolve(__dirname, '../DLLs/DLLTEST.dll'));
     const convertHL7V2ToV3Async = edge.func({
-        assemblyFile: 'DLLTEST.dll',
+        assemblyFile: dllPath,
         typeName: 'DLLTEST.DLLTEST',
         methodName: 'ConvertHL7V2ToV3Async'
     });
@@ -30,6 +31,7 @@ const convertHL7V2TOV3 = async (args: ConvertHL7V2TOV3Args): Promise<ConvertHL7V
             });
         });
 
+        logger.info(result.HL7V3);
         const response: ConvertHL7V2TOV3Result = {
             covertHL7V2TOV3Result: "Success",
             version: '3.0',
