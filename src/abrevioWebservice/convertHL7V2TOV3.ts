@@ -7,7 +7,7 @@ const convertHL7V2TOV3 = async (args: ConvertHL7V2TOV3Args): Promise<ConvertHL7V
     const { hl7v2 } = args;
     logger.info('convertHL7V2TOV3');
 
-    const dllPath = path.dirname(path.resolve(__dirname, '../DLLs/DLLTEST.dll'));
+    const dllPath = path.join(__dirname, '..', 'abrevioWebservice', 'DLLs', 'DLLTEST.dll');
     const convertHL7V2ToV3Async = edge.func({
         assemblyFile: dllPath,
         typeName: 'DLLTEST.DLLTEST',
