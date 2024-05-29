@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
-import path from "path";
+import path from 'path';
 import fs from 'fs';
 
-const abrevioWebservice = async (req: Request, res: Response): Promise<void> => {
+const abrevioWebservice = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
     const wsdlPath = path.join(__dirname, 'abrevioWebservice.html');
     const wsdlContents = fs.readFileSync(wsdlPath, 'utf8');
 

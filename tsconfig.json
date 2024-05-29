@@ -19,11 +19,6 @@
         "sourceMap": true /* Generates corresponding .map files for easier debugging. */,
         "typeRoots": ["./node_modules/@types"]
     },
-    "exclude": [
-        "node_modules",
-        "build",
-        "./build/*",
-        "./build/*/*",
-    ],
+    "exclude": ["node_modules", "build", "./build/*", "./build/*/*"],
     "include": ["src/**/*.ts"]
 }

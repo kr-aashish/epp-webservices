@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path';
 import fs from 'fs';
 
 const wsdlPath = path.join(__dirname, 'abrevioWebservice.wsdl');

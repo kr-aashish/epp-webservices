@@ -1,19 +1,15 @@
-import logger from "../loggers/winstonLogger";
+import logger from '../loggers/winstonLogger';
 
-const csvDeIdentifyProcessor = (args: any) => {
-    const csv = args.CSV;
-    const encryptKey = args.encryptkey;
-    const encryptKeySize = args.encryptkeysize;
-    
+const csvDeIdentifyProcessor = (args: string) => {
     logger.info(args);
     logger.info('csvDeIdentifyProcessor');
 
-    const processedCSV = "Processed CSV content";
+    const processedCSV = 'Processed CSV content';
 
     const response = {
         CSVDeIdentifyProcessorResult: processedCSV,
         successful: true,
-        errormessage: ""
+        errormessage: ''
     };
 
     return response;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import path from "path";
+import path from 'path';
 import fs from 'fs';
 
 const aiEngine = async (req: Request, res: Response): Promise<void> => {

@@ -9,7 +9,10 @@ import abrevioWebserviceWsdl from './services/abrevioWebservice/getWsdlContents'
 import aiEngineSoapService from './services/aiEngine/soapService';
 import abrevioSoapService from './services/abrevioWebservice/soapService';
 
-process.env.NODE_ENV ? dotenv.config({path: `.env.${process.env.NODE_ENV}`}) : dotenv.config({path: `.env.dev`});
+// eslint-disable-next-line no-unused-expressions
+process.env.NODE_ENV
+    ? dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
+    : dotenv.config({ path: '.env.dev' });
 
 const startServer = async (app: Application) => {
     const port = Number(process.env.API_SERVER_PORT);
@@ -18,13 +21,29 @@ const startServer = async (app: Application) => {
 
     const server = http.createServer(app);
 
-    soap.listen(server, aiEngineEndpoint, aiEngineSoapService, aiEngineWsdl, () => {
-        logger.info(`AI Engine Service is listening on ${aiEngineEndpoint}`);
-    });
+    soap.listen(
+        server,
+        aiEngineEndpoint,
+        aiEngineSoapService,
+        aiEngineWsdl,
+        () => {
+            logger.info(
+                `AI Engine Service is listening on ${aiEngineEndpoint}`
+            );
+        }
+    );
 
-    soap.listen(server, abrevioWebserviceEndpoint, abrevioSoapService, abrevioWebserviceWsdl, () => {
-        logger.info(`Abrevio Webservice is listening on ${abrevioWebserviceEndpoint}`);
-    });
+    soap.listen(
+        server,
+        abrevioWebserviceEndpoint,
+        abrevioSoapService,
+        abrevioWebserviceWsdl,
+        () => {
+            logger.info(
+                `Abrevio Webservice is listening on ${abrevioWebserviceEndpoint}`
+            );
+        }
+    );
 
     server
         .listen(port, () => logger.info(`Listening to port ${port}`))
