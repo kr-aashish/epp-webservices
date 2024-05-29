@@ -9,7 +9,7 @@ import abrevioWebserviceWsdl from './services/abrevioWebservice/getWsdlContents'
 import aiEngineSoapService from './services/aiEngine/soapService';
 import abrevioSoapService from './services/abrevioWebservice/soapService';
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+process.env.NODE_ENV ? dotenv.config({path: `.env.${process.env.NODE_ENV}`}) : dotenv.config({path: `.env.dev`});
 
 const startServer = async (app: Application) => {
     const port = Number(process.env.API_SERVER_PORT);

@@ -17,7 +17,7 @@
         "strictNullChecks": true /* When type checking, take into account 'null' and 'undefined'. */,
         "skipLibCheck": true /* Skip type checking all .d.ts files. */,
         "sourceMap": true /* Generates corresponding .map files for easier debugging. */,
-        "typeRoots": ["src/models", "./node_modules/@types"]
+        "typeRoots": ["./node_modules/@types"]
     },
     "exclude": [
         "node_modules",
