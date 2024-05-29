@@ -1,0 +1,53 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://tempuri.org/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             name="MyService"
+             targetNamespace="http://tempuri.org/">
+    <types>
+        <xsd:schema targetNamespace="http://tempuri.org/">
+            <xsd:element name="AiEngineVersion">
+                <xsd:complexType>
+                    <xsd:sequence/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="AiEngineVersionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AiEngineVersionResult" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+    <message name="AiEngineVersionRequest">
+        <part name="parameters" element="tns:AiEngineVersion"/>
+    </message>
+    <message name="AiEngineVersionResponse">
+        <part name="parameters" element="tns:AiEngineVersionResponse"/>
+    </message>
+    <portType name="MyPortType">
+        <operation name="AiEngineVersion">
+            <input message="tns:AiEngineVersionRequest"/>
+            <output message="tns:AiEngineVersionResponse"/>
+        </operation>
+    </portType>
+    <binding name="MyBinding" type="tns:MyPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="AiEngineVersion">
+            <soap:operation soapAction="http://tempuri.org/AiEngineVersion"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MyService">
+        <port name="MyPort" binding="tns:MyBinding">
+            <soap:address location="http://localhost:8050/api/v1/AIM.AIengine.Webservices/Service.asmx"/>
+        </port>
+    </service>
+</definitions>

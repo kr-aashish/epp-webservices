@@ -1,0 +1,44 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: epp-webservices
+        env_file:
+            - .env.prod
+        networks:
+            - epp-net
+        ports:
+            - '8050:8050'
+        restart: always
+        volumes:
+            - ./app/logs:/app/logs
+
+    prom-sever:
+        image: prom/prometheus
+        container_name: prometheus
+        networks:
+            - epp-net
+        ports:
+            - '9090:9090'
+        volumes:
+            - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+
+    grafana:
+        image: grafana/grafana-oss
+        container_name: grafana
+        networks:
+            - epp-net
+        ports:
+            - '3000:3000'
+
+    loki:
+        image: grafana/loki
+        container_name: loki
+        networks:
+            - epp-net
+        ports:
+            - '3100:3100'
+
+networks:
+    epp-net:
