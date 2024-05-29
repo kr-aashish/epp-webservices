@@ -1,0 +1,103 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://tempuri.org/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="MyService"
+             targetNamespace="http://tempuri.org/">
+    <types>
+        <xsd:schema targetNamespace="http://tempuri.org/">
+            <xsd:element name="CSVDeIdentifyProcessor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CSV" type="xsd:string"/>
+                        <xsd:element name="encryptkey" type="xsd:string"/>
+                        <xsd:element name="encryptkeysize" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CSVDeIdentifyProcessorResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="CSVDeIdentifyProcessorResult" type="xsd:string"/>
+                        <xsd:element name="successful" type="xsd:boolean"/>
+                        <xsd:element name="errormessage" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- New elements for covertHL7V2TOV3 -->
+            <xsd:element name="covertHL7V2TOV3">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="hl7v2" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="covertHL7V2TOV3Response">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="covertHL7V2TOV3Result" type="xsd:string"/>
+                        <xsd:element name="version" type="xsd:string"/>
+                        <xsd:element name="hl7v3" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="CSVDeIdentifyProcessorRequest">
+        <part name="parameters" element="tns:CSVDeIdentifyProcessor"/>
+    </message>
+    <message name="CSVDeIdentifyProcessorResponse">
+        <part name="parameters" element="tns:CSVDeIdentifyProcessorResponse"/>
+    </message>
+
+    <!-- New messages for covertHL7V2TOV3 -->
+    <message name="covertHL7V2TOV3Request">
+        <part name="parameters" element="tns:covertHL7V2TOV3"/>
+    </message>
+    <message name="covertHL7V2TOV3Response">
+        <part name="parameters" element="tns:covertHL7V2TOV3Response"/>
+    </message>
+
+    <portType name="MyPortType">
+        <operation name="CSVDeIdentifyProcessor">
+            <input message="tns:CSVDeIdentifyProcessorRequest"/>
+            <output message="tns:CSVDeIdentifyProcessorResponse"/>
+        </operation>
+        <!-- New operation for covertHL7V2TOV3 -->
+        <operation name="covertHL7V2TOV3">
+            <input message="tns:covertHL7V2TOV3Request"/>
+            <output message="tns:covertHL7V2TOV3Response"/>
+        </operation>
+    </portType>
+
+    <binding name="MyBinding" type="tns:MyPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CSVDeIdentifyProcessor">
+            <soap:operation soapAction="http://tempuri.org/CSVDeIdentifyProcessor"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <!-- New binding for covertHL7V2TOV3 -->
+        <operation name="covertHL7V2TOV3">
+            <soap:operation soapAction="http://tempuri.org/covertHL7V2TOV3"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="MyService">
+        <port name="MyPort" binding="tns:MyBinding">
+            <soap:address location="http://localhost:8080/YourService.asmx"/>
+        </port>
+    </service>
+</definitions>
