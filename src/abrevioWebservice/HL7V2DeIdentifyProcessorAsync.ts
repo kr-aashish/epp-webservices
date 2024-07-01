@@ -30,7 +30,9 @@ const params = {
     encryptkeysize: encryptkeysize
 };
 
-const HL7V2DeIdentifyProcessor = () => {
+const HL7V2DeIdentifyProcessor = async (
+    args: any
+) => {
     return new Promise((resolve, reject) => {
         try {
             HL7V2DeIdentifyProcessorAsync(params, (error, result) => {
