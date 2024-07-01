@@ -71,6 +71,28 @@
                 </xsd:complexType>
             </xsd:element>
         </xsd:schema>
+
+        <xsd:schema targetNamespace="http://tempuri.org/">
+            <!-- New elements for HL7V2DeIdentifyProcessor -->
+            <xsd:element name="HL7V2DeIdentifyProcessor">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="HL7V2" type="xsd:string"/>
+                        <xsd:element name="encryptkey" type="xsd:string"/>
+                        <xsd:element name="encryptkeysize" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="HL7V2DeIdentifyProcessorResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="HL7V2DeIdentifyProcessorResult" type="xsd:string"/>
+                        <xsd:element name="successful" type="xsd:boolean"/>
+                        <xsd:element name="errormessage" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
     </types>
 
     <message name="CSVDeIdentifyProcessorRequest">
@@ -104,6 +126,14 @@
         <part name="parameters" element="tns:ICDConverterVersionResponse"/>
     </message>
 
+    <!-- New messages for HL7V2DeIdentifyProcessor -->
+    <message name="HL7V2DeIdentifyProcessorRequest">
+        <part name="parameters" element="tns:HL7V2DeIdentifyProcessor"/>
+    </message>
+    <message name="HL7V2DeIdentifyProcessorResponse">
+        <part name="parameters" element="tns:HL7V2DeIdentifyProcessorResponse"/>
+    </message>
+
     <portType name="MyPortType">
         <operation name="CSVDeIdentifyProcessor">
             <input message="tns:CSVDeIdentifyProcessorRequest"/>
@@ -124,6 +154,12 @@
             <input message="tns:ICDConverterVersionRequest"/>
             <output message="tns:ICDConverterVersionResponse"/>
         </operation>
+        <!-- New operation for HL7V2DeIdentifyProcessor -->
+        <operation name="HL7V2DeIdentifyProcessor">
+            <input message="tns:HL7V2DeIdentifyProcessorRequest"/>
+            <output message="tns:HL7V2DeIdentifyProcessorResponse"/>
+        </operation>
+</portType>
     </portType>
 
     <binding name="MyBinding" type="tns:MyPortType">
@@ -160,6 +196,17 @@
         <!-- New binding for ICDConverterVersion -->
         <operation name="ICDConverterVersion">
             <soap:operation soapAction="http://tempuri.org/ICDConverterVersion"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+
+        <!-- New binding for HL7V2DeIdentifyProcessor -->
+        <operation name="HL7V2DeIdentifyProcessor">
+            <soap:operation soapAction="http://tempuri.org/HL7V2DeIdentifyProcessor"/>
             <input>
                 <soap:body use="literal"/>
             </input>

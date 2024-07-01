@@ -30,14 +30,26 @@ const params = {
     encryptkeysize: encryptkeysize
 };
 
-try{
-    HL7V2DeIdentifyProcessorAsync(params, (error, result) => {
-        if (error) {
-            console.error('Errorjjjjjj:', error);
-        } else {
-            console.log('result',result)
+const HL7V2DeIdentifyProcessor = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            HL7V2DeIdentifyProcessorAsync(params, (error, result) => {
+                if (error) {
+                    console.error('Error:', error);
+                    reject(error);
+                } else {
+                    console.log('result', result);
+                    resolve({
+                        HL7V2DeIdentifyProcessorResult: result,
+                        successful: true
+                    });
+                }
+            });
+        } catch (error) {
+            console.log('error:', error);
+            reject(error);
         }
     });
-}catch(error){
-    console.log('errorinjs',error)
-}
+};
+
+export default HL7V2DeIdentifyProcessor;
