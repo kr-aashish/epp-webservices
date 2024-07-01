@@ -42,6 +42,20 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+
+            <!-- New elements for consolidateVersion -->
+            <xsd:element name="consolidateVersion">
+                <xsd:complexType>
+                    <xsd:sequence/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="consolidateVersionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="consolidateVersionResult" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </types>
 
@@ -60,6 +74,14 @@
         <part name="parameters" element="tns:covertHL7V2TOV3Response"/>
     </message>
 
+    <!-- New messages for consolidateVersion -->
+    <message name="consolidateVersionRequest">
+        <part name="parameters" element="tns:consolidateVersion"/>
+    </message>
+    <message name="consolidateVersionResponse">
+        <part name="parameters" element="tns:consolidateVersionResponse"/>
+    </message>
+
     <portType name="MyPortType">
         <operation name="CSVDeIdentifyProcessor">
             <input message="tns:CSVDeIdentifyProcessorRequest"/>
@@ -69,6 +91,11 @@
         <operation name="covertHL7V2TOV3">
             <input message="tns:covertHL7V2TOV3Request"/>
             <output message="tns:covertHL7V2TOV3Response"/>
+        </operation>
+        <!-- New operation for consolidateVersion -->
+        <operation name="consolidateVersion">
+            <input message="tns:consolidateVersionRequest"/>
+            <output message="tns:consolidateVersionResponse"/>
         </operation>
     </portType>
 
@@ -86,6 +113,16 @@
         <!-- New binding for covertHL7V2TOV3 -->
         <operation name="covertHL7V2TOV3">
             <soap:operation soapAction="http://tempuri.org/covertHL7V2TOV3"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <!-- New binding for consolidateVersion -->
+        <operation name="consolidateVersion">
+            <soap:operation soapAction="http://tempuri.org/consolidateVersion"/>
             <input>
                 <soap:body use="literal"/>
             </input>
