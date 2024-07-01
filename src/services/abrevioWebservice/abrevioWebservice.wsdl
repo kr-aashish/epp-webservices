@@ -56,6 +56,20 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+
+            <!-- New elements for ICDConverterVersion -->
+            <xsd:element name="ICDConverterVersion">
+                <xsd:complexType>
+                    <xsd:sequence/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ICDConverterVersionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ICDConverterVersionResult" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </types>
 
@@ -82,6 +96,14 @@
         <part name="parameters" element="tns:consolidateVersionResponse"/>
     </message>
 
+    <!-- New messages for ICDConverterVersion -->
+    <message name="ICDConverterVersionRequest">
+        <part name="parameters" element="tns:ICDConverterVersion"/>
+    </message>
+    <message name="ICDConverterVersionResponse">
+        <part name="parameters" element="tns:ICDConverterVersionResponse"/>
+    </message>
+
     <portType name="MyPortType">
         <operation name="CSVDeIdentifyProcessor">
             <input message="tns:CSVDeIdentifyProcessorRequest"/>
@@ -96,6 +118,11 @@
         <operation name="consolidateVersion">
             <input message="tns:consolidateVersionRequest"/>
             <output message="tns:consolidateVersionResponse"/>
+        </operation>
+        <!-- New operation for ICDConverterVersion -->
+        <operation name="ICDConverterVersion">
+            <input message="tns:ICDConverterVersionRequest"/>
+            <output message="tns:ICDConverterVersionResponse"/>
         </operation>
     </portType>
 
@@ -123,6 +150,16 @@
         <!-- New binding for consolidateVersion -->
         <operation name="consolidateVersion">
             <soap:operation soapAction="http://tempuri.org/consolidateVersion"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <!-- New binding for ICDConverterVersion -->
+        <operation name="ICDConverterVersion">
+            <soap:operation soapAction="http://tempuri.org/ICDConverterVersion"/>
             <input>
                 <soap:body use="literal"/>
             </input>
