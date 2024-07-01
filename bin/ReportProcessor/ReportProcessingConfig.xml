@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ReportProcessingConfig>
+
+
+  <ReportTypes>
+    <Report objectId="1" baseType="CSV" patternType="CSVPattern" locationType="CSVLocation">
+      <ReportOptions delimiter=","></ReportOptions>
+      <SearchPattern >
+        <BeginIndicator><![CDATA[(?m)^]]></BeginIndicator>
+        <EndIndicator><![CDATA[$]]></EndIndicator>
+      </SearchPattern>
+      <ReportLocations>
+        <Location  locationId="1" >
+          <Properties field="2"></Properties>
+        </Location>
+      </ReportLocations>
+    </Report>
+    
+
+    
+    
+    <Report objectId="2" baseType="XML" patternType="XMLPattern" locationType ="XMLLocation">
+      <ReportOptions></ReportOptions>
+      <SearchPattern >
+        <BeginIndicator><![CDATA[(?m)^[<]book.*]]></BeginIndicator>
+        <EndIndicator><![CDATA[(?m)[<][/]book.*]]></EndIndicator>
+      </SearchPattern>
+      <ReportLocations>
+        <Location locationId="1">
+          <Properties locationType="element" path="book\author" pathStartsAtRoot="true"></Properties>
+        </Location>
+        <Location locationId="2">
+          <Properties locationType="element" path="book\description" pathStartsAtRoot="true"></Properties>
+        </Location>
+      </ReportLocations>
+    </Report>
+    <Report objectId="3" baseType="XML" patternType="XMLPattern" locationType ="XMLLocation">
+      <ReportOptions></ReportOptions>
+      <SearchPattern >
+        <BeginIndicator><![CDATA[(?m)^[<]ClinicalDocument.*]]></BeginIndicator>
+        <EndIndicator><![CDATA[(?m)[<][/]ClinicalDocument.*]]></EndIndicator>
+      </SearchPattern>
+      <ReportLocations>
+        
+        <!--NAME IDENTIFIERS-->
+        
+        <Location locationId="1" >
+          <!-- NAME: Patient Name (including patient alias) (any occurence)-->
+          <Properties locationType="element" path="patient\name\" pathStartsAtRoot="false" ></Properties>
+        </Location>
+        <Location locationId="2" >
+          <!-- NAME: AssociatedPerson (e.g. Mother's Maiden Name) (any occurence)-->
+          <Properties locationType="element" path="associatedPerson\name\" pathStartsAtRoot="false" ></Properties>
+        </Location>   
+      
+        <!--COMPOSITE ID + NAME IDENTIFIERS-->
+        
+        <Location locationId="3" >
+          <!-- NAME: Attending Doctor, Referring Doctor, Consulting Doctor, Admitting Doctor, Ordering Provider, and any other encounter participant including Collector Identifier--> 
+          <Properties locationType="element" path="assignedPerson\name" pathStartsAtRoot="false" ></Properties>
+        </Location>
+        <Location locationId="4" >
+          <!-- NAME: Attending Doctor, Referring Doctor, Consulting Doctor, Admitting Doctor, Ordering Provider, and any other encounter participant including Collector Identifier--> 
+          <Properties locationType="element" path="assignedEntity\id" pathStartsAtRoot="false" ></Properties>
+        </Location>
+        <Location locationId="5" >
+          <!-- NAME: Result Copies To--> 
+          <Properties locationType="element" path="informationRecispient\name" pathStartsAtRoot="false" ></Properties>
+        </Location>      
+        <Location locationId="6" >
+          <!-- ID: Result Copies To--> 
+          <Properties locationType="element" path="intendedRecipient\id" pathStartsAtRoot="false" ></Properties>
+        </Location>    
+        <Location locationId="7" >
+          <!-- NAME: Responsible Observer--> 
+          <Properties locationType="element" path="authorPerson\name" pathStartsAtRoot="false" ></Properties>
+        </Location>      
+        <Location locationId="8" >
+          <!-- ID: Responsible Observer--> 
+          <Properties locationType="element" path="assignedAuthor\id" pathStartsAtRoot="false" ></Properties>
+        </Location>  
+        
+        <!--ORGANIZATION NAME IDENTIFIERS-->
+        
+        <Location locationId="9" >
+          <!-- NAME: Sending Facility or Ordering Facility (any occurrence)--> 
+          <Properties locationType="element" path="representedOrganization\name" pathStartsAtRoot="false" ></Properties>
+        </Location>      
+        <Location locationId="10" >
+          <Properties locationType="element" path="representedCustodianOrganization\name" pathStartsAtRoot="false" ></Properties>
+        </Location>  
+        
+        <Location locationId="11" >
+          <!-- NAME: Scoping Organization (any occurrence)--> 
+          <Properties locationType="element" path="scopingOrganization\name" pathStartsAtRoot="false" ></Properties>
+        </Location>      
+        <Location locationId="12" >
+          <!-- NAME: PlayingEntity (any occurrence)--> 
+          <Properties locationType="element" path="playingEntity\name" pathStartsAtRoot="false" ></Properties>
+        </Location>  
+        
+        <!--ADDRESS IDENTIFIERS-->
+        
+        <Location locationId="13" >
+          <!-- Any Address --> 
+          <Properties locationType="element" path="addr\" pathStartsAtRoot="false" ></Properties>
+        </Location>      
+        
+        <!--TELECOMMUNICATION IDENTIFIERS-->
+        
+        <Location locationId="14" >
+          <!-- Any Telephone number --> 
+          <Properties locationType="attribute" path="telecom\" pathStartsAtRoot="false" attributeName="value" ></Properties>
+        </Location>    
+      
+        <!--SOCIAL SECURITY NUMBER (also MRN, Account Nuumber, Drivers License Number)-->
+        
+        <Location locationId="15" >
+          <!-- Any Patient ID --> 
+          <Properties locationType="attribute" path="patientRole\id\" pathStartsAtRoot="false" attributeName="extension" ></Properties>
+        </Location>    
+        <Location locationId="16" >
+          <!-- Any Contact Person ID --> 
+          <Properties locationType="attribute" path="associatedEntity\id\" pathStartsAtRoot="false" attributeName="extension" ></Properties>
+        </Location>        
+      
+        <!--FREE TEXT SECTIONS - including report text-->
+        <Location locationId="17" >
+          <!-- Any Tezt --> 
+          <Properties locationType="element" path="text\" pathStartsAtRoot="false" ></Properties>
+        </Location>  
+        <Location locationId="18" >
+          <!-- Any Title --> 
+          <Properties locationType="element" path="title\" pathStartsAtRoot="false" ></Properties>
+        </Location>        
+        
+        <!--DATE IDENTIFIERS-->  
+        <Location locationId="19" >
+          <!-- Patient Date of Birth --> 
+          <Properties locationType="attribute" path="ClinicalDocument\recordTarget\patientRole\patient\birthTime\" pathStartsAtRoot="true" attributeName="value" ></Properties>
+        </Location>   
+         <Location locationId="20" >
+          <!-- any time  --> 
+          <Properties locationType="attribute" path="time\" pathStartsAtRoot="false" attributeName="value" ></Properties>
+        </Location>
+        <Location locationId="21" >
+          <!-- any effectiveTime low  --> 
+          <Properties locationType="attribute" path="effectiveTime\low\" pathStartsAtRoot="false" attributeName="value" ></Properties>
+        </Location>
+        <Location locationId="22" >
+          <!-- any effectiveTime  --> 
+          <Properties locationType="attribute" path="effectiveTime\" pathStartsAtRoot="false" attributeName="value" ></Properties>
+        </Location>
+        
+        
+      
+      </ReportLocations>
+    </Report>
+    <Report objectId="4" baseType="HL7V2" patternType="HL7V2Pattern" locationType="HL7V2Location">
+      <ReportOptions></ReportOptions>
+      <SearchPattern >
+        <BeginIndicator><![CDATA[(?m)^MSH]]></BeginIndicator>
+        <EndIndicator><![CDATA[(?m)^$]]></EndIndicator>
+      </SearchPattern>
+      <ReportLocations>
+        <Location   locationId="1">
+          <Properties segment="PID" field="3" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="2">
+          <Properties segment="PID" field="3" repetition="2" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="3">
+          <Properties segment="PID" field="3" repetition="3" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="4">
+          <Properties segment="PID" field="5" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="5">
+          <Properties segment="PID" field="5" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="6">
+          <Properties segment="PID" field="5" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="7">
+          <Properties segment="PID" field="7" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="8">
+          <Properties segment="PID" field="9" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="9">
+          <Properties segment="PID" field="9" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="10">
+          <Properties segment="PID" field="9" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="11">
+          <Properties segment="PID" field="11" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="12">
+          <Properties segment="PID" field="11" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="13">
+          <Properties segment="PID" field="11" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="14">
+          <Properties segment="PID" field="11" repetition="1" component="4" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="15">
+          <Properties segment="PID" field="11" repetition="1" component="5" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="16">
+          <Properties segment="PID" field="13" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="17">
+          <Properties segment="PID" field="14" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="18">
+          <Properties segment="PID" field="18" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="19">
+          <Properties segment="PID" field="19" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="20">
+          <Properties segment="NK1" field="2" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="21">
+          <Properties segment="NK1" field="2" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="22">
+          <Properties segment="NK1" field="2" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="23">
+          <Properties segment="NK1" field="4" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="24">
+          <Properties segment="NK1" field="4" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="25">
+          <Properties segment="NK1" field="4" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="26">
+          <Properties segment="NK1" field="4" repetition="1" component="4" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="27">
+          <Properties segment="NK1" field="4" repetition="1" component="5" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="28">
+          <Properties segment="NK1" field="5" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="29">
+          <Properties segment="NK1" field="6" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="30">
+          <Properties segment="PV1" field="7" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+
+        <Location   locationId="33">
+          <Properties segment="PV1" field="8" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+
+        <Location   locationId="36">
+          <Properties segment="PV1" field="9" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+
+        <Location   locationId="39">
+          <Properties segment="PV1" field="17" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+
+        <Location   locationId="42">
+          <Properties segment="ORC" field="21" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="43">
+          <Properties segment="ORC" field="22" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="44">
+          <Properties segment="ORC" field="22" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="45">
+          <Properties segment="ORC" field="22" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="46">
+          <Properties segment="ORC" field="22" repetition="1" component="4" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="47">
+          <Properties segment="ORC" field="22" repetition="1" component="5" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="48">
+          <Properties segment="ORC" field="23" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="49">
+          <Properties segment="ORC" field="24" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="50">
+          <Properties segment="ORC" field="24" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="51">
+          <Properties segment="ORC" field="24" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="52">
+          <Properties segment="ORC" field="24" repetition="1" component="4" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="53">
+          <Properties segment="ORC" field="24" repetition="1" component="5" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="54">
+          <Properties segment="OBR" field="3" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="55">
+          <Properties segment="OBR" field="16" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="56">
+          <Properties segment="OBR" field="16" repetition="1" component="2" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="57">
+          <Properties segment="OBR" field="16" repetition="1" component="3" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="58">
+          <Properties segment="OBR" field="28" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="59">
+          <Properties segment="OBR" field="32" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="60">
+          <Properties segment="OBR" field="33" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+
+        <Location   locationId="61">
+          <Properties segment="ORC" field="10" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="62">
+          <Properties segment="ORC" field="12" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        
+        <Location   locationId="63">
+          <Properties segment="OBX" field="5" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="64">
+          <Properties segment="OBR" field="33" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="65">
+          <Properties segment="MSH" field="4" repetition="1" component="1" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="66">
+          <Properties segment="OBR" field="34" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="67">
+          <Properties segment="OBR" field="35" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="68">
+          <Properties segment="OBR" field="18" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="69">
+          <Properties segment="OBR" field="19" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+
+        <Location   locationId="70">
+          <Properties segment="PID" field="2" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+        <Location   locationId="71">
+          <Properties segment="PID" field="6" repetition="0" component="0" subComponent="0"></Properties>
+        </Location>
+      </ReportLocations>
+    </Report>
+    <Report objectId="5" baseType="FixedLength" patternType="FixedLengthPattern" locationType="FixedLengthLocation">
+      <SearchPattern >
+        <BeginIndicator><![CDATA[(?m)^]]></BeginIndicator>
+        <EndIndicator><![CDATA[$]]></EndIndicator>
+      </SearchPattern>
+      <ReportLocations>
+        <Location  locationId="1">
+          <Properties startIndex="1" endIndex="51"></Properties>
+        </Location>
+        <Location  locationId="2">
+          <Properties startIndex="94" endIndex="119"></Properties>
+        </Location>
+        <Location  locationId="3">
+          <Properties startIndex="120" endIndex="150"></Properties>
+        </Location>
+        <Location  locationId="4">
+          <Properties startIndex="151" endIndex="176"></Properties>
+        </Location>
+        <Location  locationId="5">
+          <Properties startIndex="177" endIndex="203"></Properties>
+        </Location>
+        <Location  locationId="6">
+          <Properties startIndex="204" endIndex="239"></Properties>
+        </Location>
+        <Location  locationId="7">
+          <Properties startIndex="240" endIndex="258"></Properties>
+        </Location>
+        <Location  locationId="8">
+          <Properties startIndex="259" endIndex="304"></Properties>
+        </Location>
+        <Location  locationId="9">
+          <Properties startIndex="305" endIndex="350"></Properties>
+        </Location>
+        <Location  locationId="10">
+          <Properties startIndex="351" endIndex="396"></Properties>
+        </Location>
+        <Location  locationId="11">
+          <Properties startIndex="402" endIndex="420"></Properties>
+        </Location>
+        <Location  locationId="12">
+          <Properties startIndex="447" endIndex="470"></Properties>
+        </Location>
+        <Location  locationId="13">
+          <Properties startIndex="471" endIndex="546"></Properties>
+        </Location>
+        <Location  locationId="14">
+          <Properties startIndex="547" endIndex="622"></Properties>
+        </Location>
+        <Location  locationId="15">
+          <Properties startIndex="623" endIndex="698"></Properties>
+        </Location>
+        <Location  locationId="16">
+          <Properties startIndex="699" endIndex="734"></Properties>
+        </Location>
+        <Location  locationId="17">
+          <Properties startIndex="735" endIndex="775"></Properties>
+        </Location>
+        <Location  locationId="18">
+          <Properties startIndex="776" endIndex="790"></Properties>
+        </Location>
+        <Location  locationId="19">
+          <Properties startIndex="791" endIndex="806"></Properties>
+        </Location>
+        <Location  locationId="20">
+          <Properties startIndex="813" endIndex="832"></Properties>
+        </Location>
+        <Location  locationId="21">
+          <Properties startIndex="833" endIndex="863"></Properties>
+        </Location>
+        <Location  locationId="22">
+          <Properties startIndex="864" endIndex="887"></Properties>
+        </Location>
+        <Location  locationId="23">
+          <Properties startIndex="888" endIndex="918"></Properties>
+        </Location>
+        <Location  locationId="24">
+          <Properties startIndex="919" endIndex="945"></Properties>
+        </Location>
+        <Location  locationId="25">
+          <Properties startIndex="946" endIndex="976"></Properties>
+        </Location>
+      </ReportLocations>
+    </Report>
+  </ReportTypes>
+    
+
+  <ReportProcessors>
+    
+    <Processor processorId="DeidentifyXML" processorType="Deidentify"  objectId="2">
+      <ProcessorSettings>
+        <Target locationId="1" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="2" targetType="identifier" encoder="alphanumeric"></Target>
+      </ProcessorSettings>
+    </Processor>
+    <Processor processorId="DeidentifyCDA" processorType="Deidentify"  objectId="3">
+      <ProcessorSettings>
+        <Target locationId="1" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="2" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="3" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="4" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="5" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="6" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="7" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="8" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="9" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="10" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="11" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="12" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="13" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="14" targetType="identifier" encoder="numeric"></Target>
+        <Target locationId="15" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="16" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target locationId="17" targetType="text" encoder="anonymous"></Target>
+        <Target locationId="18" targetType="text" encoder="anonymous"></Target>
+        <Target locationId="19" targetType="identifier" encoder="date"></Target>
+        <Target locationId="20" targetType="identifier" encoder="date"></Target>
+        <Target locationId="21" targetType="identifier" encoder="date"></Target>
+        <Target locationId="22" targetType="identifier" encoder="date"></Target>
+        <DateFormats>
+          <Format value="yyyyMMdd"></Format>
+          <Format value="yyyyMMddhhmmss zzzz"></Format>
+          <Format value="yyyyMMddHHmmss zzzz"></Format>
+          <Format value="yyyyMMddhhmmss"></Format>
+          <Format value="yyyyMMddHHmmss"></Format>
+        </DateFormats>
+      </ProcessorSettings>
+    </Processor>
+    <Processor processorId="DeidentifyCSV" processorType="Deidentify"  objectId="10">
+      <ProcessorSettings >
+          <Target  locationId="1"  targetType="identifier" encoder="alphanumeric"></Target>
+      </ProcessorSettings>
+    </Processor>
+    <Processor processorId="DeidentifyFixedLength" processorType="Deidentify"  objectId="5">
+      <ProcessorSettings >
+        <Target  locationId="1"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="2"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="3"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="4"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="5"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="6"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="7"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="8"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="9"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="10"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="11"  targetType="identifier" encoder="date"></Target>
+        <Target  locationId="12"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="13"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="14"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="15"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="16"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="17"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="18"  targetType="identifier" encoder="date"></Target>
+        <Target  locationId="19"  targetType="identifier" encoder="date"></Target>
+        <Target  locationId="20"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="21"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="22"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="23"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="24"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="25"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="26"  targetType="text" encoder="alphanumeric"></Target>
+        <DateFormats>
+          <Format value="MM/dd/yyyy"></Format>
+        </DateFormats>
+      </ProcessorSettings>
+    </Processor>
+
+    <!--encoder="alphanumeric">
+        encoder="alphabetic">
+        encoder="numeric">
+        encoder="date">
+        encoder="anonymous">-->
+
+    <Processor  processorId="DeidentifyHL7V2" processorType="Deidentify"  objectId="4">
+      <ProcessorSettings>
+        <Target  locationId="1"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="2"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="3"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="4"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="5"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="6"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="7"  targetType="identifier" encoder="date"></Target>
+        <Target  locationId="8"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="9"  targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="10" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="11" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="12" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="13" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="14" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="15" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="16" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="17" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="18" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="19" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="20" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="21" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="22" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="23" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="24" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="25" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="26" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="27" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="28" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="29" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="30" targetType="identifier" encoder="alphanumeric"></Target>
+
+        <Target  locationId="33" targetType="identifier" encoder="alphanumeric"></Target>
+
+        <Target  locationId="36" targetType="identifier" encoder="alphanumeric"></Target>
+
+        <Target  locationId="39" targetType="identifier" encoder="alphanumeric"></Target>
+
+        <Target  locationId="42" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="43" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="44" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="45" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="46" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="47" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="48" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="49" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="50" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="51" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="52" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="53" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="54" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="55" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="56" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="57" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="58" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="59" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="60" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="61" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="62" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="63" targetType="text" encoder="anonymous"></Target>
+        <Target  locationId="64" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="65" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="66" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="67" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="68" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="69" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="70" targetType="identifier" encoder="alphanumeric"></Target>
+        <Target  locationId="71" targetType="identifier" encoder="alphanumeric"></Target>
+        <DateFormats>
+          <Format value="yyyyMMdd"></Format>
+          <Format value="yyyyMMddhhmmss zzzz"></Format>
+        </DateFormats>
+        
+      </ProcessorSettings>
+    </Processor>
+    
+  </ReportProcessors>
+  
+  <Runs>
+    <Run objectId="1">
+      <!--<Processor processorId="DuplicateCheck"></Processor>-->
+      <Processor processorId="DeidentifyCSV"></Processor>
+      <!--<WriteOutput outputPath="C:\" outputFileExtension="txt" outputFileName="CSVoutput" append="true"></WriteOutput>-->
+    </Run>
+    <Run objectId="2">
+      <Processor processorId="DeidentifyXML"></Processor>
+    </Run>
+    <Run objectId="3">
+      <Processor processorId="DeidentifyCDA"></Processor>
+    </Run>
+    <Run objectId="4">
+      <Processor processorId="DeidentifyHL7V2"></Processor>
+    </Run>
+    <Run objectId="5">
+      <Processor processorId="DeidentifyFixedLength"></Processor>
+    </Run>
+  </Runs>
+
+
+
+
+  <SearchPatterns>
+    <SearchPattern patternType="XMLPattern"  objectId="2">
+      <BeginIndicator><![CDATA[(?m)^[<]book.*]]></BeginIndicator>
+      <EndIndicator><![CDATA[(?m)[<][/]book.*]]></EndIndicator>
+    </SearchPattern>
+    <SearchPattern patternType="HL7V2Pattern"  objectId="4">
+      <BeginIndicator><![CDATA[(?m)^MSH]]></BeginIndicator>
+      <EndIndicator><![CDATA[(?m)^$]]></EndIndicator>
+    </SearchPattern>
+  </SearchPatterns>
+
+  <LocationDefinitions>
+   
+    <ReportLocations reportType="XML" objectId="2">
+      <Location locationType ="XMLElementLocation" locationId="1">
+        <Properties elementPath="book\author" pathType="startsAtRoot"></Properties>
+      </Location>
+      <Location locationType ="XMLElementLocation" locationId="2">
+        <Properties elementPath="book\description" pathType="startsAtRoot"></Properties>
+      </Location>
+    </ReportLocations>
+    <ReportLocations reportType="HL7V2" objectId="4">
+      <Location locationType="HL7V2Location"  locationId="1">
+        <Properties segment="PID" field="3" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="2">
+        <Properties segment="PID" field="3" repetition="2" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="3">
+        <Properties segment="PID" field="3" repetition="3" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="4">
+        <Properties segment="PID" field="5" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="5">
+        <Properties segment="PID" field="5" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="6">
+        <Properties segment="PID" field="5" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="7">
+        <Properties segment="PID" field="7" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="8">
+        <Properties segment="PID" field="9" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="9">
+        <Properties segment="PID" field="9" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="10">
+        <Properties segment="PID" field="9" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="11">
+        <Properties segment="PID" field="11" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="12">
+        <Properties segment="PID" field="11" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="13">
+        <Properties segment="PID" field="11" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="14">
+        <Properties segment="PID" field="11" repetition="1" component="4" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="15">
+        <Properties segment="PID" field="11" repetition="1" component="5" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="16">
+        <Properties segment="PID" field="13" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="17">
+        <Properties segment="PID" field="14" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="18">
+        <Properties segment="PID" field="18" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="19">
+        <Properties segment="PID" field="19" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="20">
+        <Properties segment="NK1" field="2" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="21">
+        <Properties segment="NK1" field="2" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="22">
+        <Properties segment="NK1" field="2" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="23">
+        <Properties segment="NK1" field="4" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="24">
+        <Properties segment="NK1" field="4" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="25">
+        <Properties segment="NK1" field="4" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="26">
+        <Properties segment="NK1" field="4" repetition="1" component="4" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="27">
+        <Properties segment="NK1" field="4" repetition="1" component="5" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="28">
+        <Properties segment="NK1" field="5" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="29">
+        <Properties segment="NK1" field="6" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="30">
+        <Properties segment="PV1" field="7" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="31">
+        <Properties segment="PV1" field="7" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="32">
+        <Properties segment="PV1" field="7" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="33">
+        <Properties segment="PV1" field="8" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="34">
+        <Properties segment="PV1" field="8" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="35">
+        <Properties segment="PV1" field="8" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="36">
+        <Properties segment="PV1" field="9" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="37">
+        <Properties segment="PV1" field="9" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="38">
+        <Properties segment="PV1" field="9" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="39">
+        <Properties segment="PV1" field="17" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="40">
+        <Properties segment="PV1" field="17" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="41">
+        <Properties segment="PV1" field="17" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="42">
+        <Properties segment="ORC" field="21" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="43">
+        <Properties segment="ORC" field="22" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="44">
+        <Properties segment="ORC" field="22" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="45">
+        <Properties segment="ORC" field="22" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="46">
+        <Properties segment="ORC" field="22" repetition="1" component="4" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="47">
+        <Properties segment="ORC" field="22" repetition="1" component="5" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="48">
+        <Properties segment="ORC" field="23" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="49">
+        <Properties segment="ORC" field="24" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="50">
+        <Properties segment="ORC" field="24" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="51">
+        <Properties segment="ORC" field="24" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="52">
+        <Properties segment="ORC" field="24" repetition="1" component="4" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="53">
+        <Properties segment="ORC" field="24" repetition="1" component="5" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="54">
+        <Properties segment="OBR" field="3" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="55">
+        <Properties segment="OBR" field="16" repetition="1" component="1" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="56">
+        <Properties segment="OBR" field="16" repetition="1" component="2" subComponent="0"></Properties>
+      </Location>
+      <Location locationType="HL7V2Location"  locationId="57">
+        <Properties segment="OBR" field="16" repetition="1" component="3" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="58">
+        <Properties segment="OBR" field="32" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+
+      <Location locationType="HL7V2Location"  locationId="59">
+        <Properties segment="OBX" field="5" repetition="0" component="0" subComponent="0"></Properties>
+      </Location>
+
+    </ReportLocations>
+  </LocationDefinitions>
+
+
+
+
+</ReportProcessingConfig>
+

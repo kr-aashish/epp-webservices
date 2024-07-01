@@ -1,0 +1,6 @@
+(load "Templates.clp")
+(load "FieldGroupsDartmouth.clp")
+(load "ConsolidationRules.clp")
+(load "ControlRules.clp")
+(load "AdvancedConsolidationDataDartmouth.clp")
+(load "Version.clp")
