@@ -8,24 +8,25 @@ const GetICDConverterVersionAsync = edge.func({
     methodName: 'GetICDConverterVersionAsync'
 });
 
-const ICDConverterVersion = async () => {
-    // Call the .NET method asynchronously without parameters
-    try {
-        // console.log('Start Time:', startTime.toISOString());
-        GetICDConverterVersionAsync({}, (error: any, result: any) => {
-            if (error) {
-                console.error('Error:', error);
-            } else {
-                console.log('ICD Converter Version:', result);
-            }
-
-            return {
-                ICDConverterVersionResult: result.Version
-            }
-        });
-    } catch (error) {
-        console.log('Error in JS:', error);
-    }
-}
+const ICDConverterVersion = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            GetICDConverterVersionAsync({}, (error, result: any) => {
+                if (error) {
+                    console.error('Error:', error);
+                    reject(error);
+                } else {
+                    console.log('ICD Converter Version:', result);
+                    resolve({
+                        ICDConverterVersionResult: result.Version
+                    });
+                }
+            });
+        } catch (error) {
+            console.log('Error in JS:', error);
+            reject(error);
+        }
+    });
+};
 
 export default ICDConverterVersion;
