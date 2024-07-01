@@ -158,7 +158,6 @@
             <input message="tns:HL7V2DeIdentifyProcessorRequest"/>
             <output message="tns:HL7V2DeIdentifyProcessorResponse"/>
         </operation>
-</portType>
     </portType>
 
     <binding name="MyBinding" type="tns:MyPortType">
